@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
-import 'nekonata_map_platform_interface.dart';
+import 'package:nekonata_map/nekonata_map_platform_interface.dart';
 
 /// An implementation of [NekonataMapPlatform] that uses method channels.
 class MethodChannelNekonataMap extends NekonataMapPlatform {

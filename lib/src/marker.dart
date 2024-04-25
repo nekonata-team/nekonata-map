@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:nekonata_map/bouncing_scale_animation_on_tap.dart';
-import 'package:nekonata_map/location_context.dart';
+import 'package:nekonata_map/src/bouncing_scale_animation_on_tap.dart';
+import 'package:nekonata_map/src/location_context.dart';
 
 ///LocationContextをもとにMarkerのプロパティを設定する
 ///また、onTapのプロパティを設定できるようにしている

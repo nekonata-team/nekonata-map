@@ -1,6 +1,5 @@
+import 'package:nekonata_map/nekonata_map_method_channel.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
-
-import 'nekonata_map_method_channel.dart';
 
 abstract class NekonataMapPlatform extends PlatformInterface {
   /// Constructs a NekonataMapPlatform.

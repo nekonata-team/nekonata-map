@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:nekonata_map/nekonata_map.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 // import 'package:vector_map_tiles/vector_map_tiles.dart';
 
-import 'apple_map.dart';
-import 'google_map.dart';
-import 'layer_base.dart';
+import 'package:nekonata_map/src/apple_map.dart';
+import 'package:nekonata_map/src/google_map.dart';
+import 'package:nekonata_map/src/layer_base.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 abstract class TileLayerWidget extends StatelessWidget {
   const TileLayerWidget({super.key});
@@ -14,7 +14,9 @@ abstract class TileLayerWidget extends StatelessWidget {
   double get opacity => 1;
 
   Widget buildAttribution(
-          BuildContext context, AttributionAlignment alignment) =>
+    BuildContext context,
+    AttributionAlignment alignment,
+  ) =>
       const SizedBox();
 }
 
@@ -134,7 +136,8 @@ class AppleMapTileLayer extends TileLayerWidget {
           TextSourceAttribution(
             'Apple Map Legal',
             onTap: () => launchUrlString(
-                'https://gspe21-ssl.ls.apple.com/html/attribution-275.html'),
+              'https://gspe21-ssl.ls.apple.com/html/attribution-275.html',
+            ),
           ),
         ],
       );
@@ -166,8 +169,9 @@ class GoogleMapTileLayer extends TileLayerWidget {
               final event = state.event;
               final camera = event.camera;
               final center = camera.center;
-              launchUrlString(
-                  'https://www.google.com/maps?ll=${center.latitude},${center.longitude}&t=m&z=${camera.zoom}');
+              await launchUrlString(
+                'https://www.google.com/maps?ll=${center.latitude},${center.longitude}&t=m&z=${camera.zoom}',
+              );
             },
           ),
         ],

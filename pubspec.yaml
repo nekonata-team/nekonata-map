@@ -8,24 +8,23 @@ environment:
   flutter: '>=3.3.0'
 
 dependencies:
-  collection: ^1.18.0
+  collection:
   flutter:
     sdk: flutter
-  flutter_hooks: ^0.20.5
-  flutter_map: ^6.1.0
-  flutter_map_animations: ^0.6.0
-  flutter_map_cancellable_tile_provider: ^2.0.0
-  geolocator: ^11.0.0
-  google_maps_flutter: ^2.6.1
-  latlong2: ^0.9.1
-  plugin_platform_interface: ^2.0.2
-  url_launcher: ^6.2.6
+  flutter_hooks:
+  flutter_map:
+  flutter_map_animations:
+  flutter_map_cancellable_tile_provider:
+  geolocator:
+  google_maps_flutter:
+  latlong2:
+  plugin_platform_interface:
+  url_launcher:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
-  very_good_analysis: ^5.1.0
+  very_good_analysis:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

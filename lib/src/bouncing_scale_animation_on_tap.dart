@@ -3,10 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 class BouncingScaleAnimationOnTap extends HookWidget {
   const BouncingScaleAnimationOnTap({
-    super.key,
-    required this.onTap,
+    required this.onTap, required this.child, super.key,
     this.alignment = Alignment.center,
-    required this.child,
   });
 
   final VoidCallback? onTap;
@@ -18,7 +16,7 @@ class BouncingScaleAnimationOnTap extends HookWidget {
     final controller = useAnimationController(
       duration: const Duration(milliseconds: 200),
     );
-    final animation = Tween<double>(begin: 1.0, end: 0.9).animate(
+    final animation = Tween<double>(begin: 1, end: 0.9).animate(
       CurvedAnimation(parent: controller, curve: Curves.easeInOut),
     );
     return GestureDetector(
@@ -26,7 +24,7 @@ class BouncingScaleAnimationOnTap extends HookWidget {
           ? () {
               onTap!();
               controller
-                  .forward(from: 0.0)
+                  .forward(from: 0)
                   .then((value) => controller.reverse());
             }
           : null,

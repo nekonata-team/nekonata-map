@@ -5,8 +5,8 @@ import 'package:nekonata_map/nekonata_map_method_channel.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  MethodChannelNekonataMap platform = MethodChannelNekonataMap();
-  const MethodChannel channel = MethodChannel('nekonata_map');
+  final platform = MethodChannelNekonataMap();
+  const channel = MethodChannel('nekonata_map');
 
   setUp(() {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(

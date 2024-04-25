@@ -1,6 +1,9 @@
 {
     "cSpell.words": [
+        "geolocator",
+        "latlong",
         "nekonata",
-        "pubspec"
+        "pubspec",
+        "vsync"
     ]
 }

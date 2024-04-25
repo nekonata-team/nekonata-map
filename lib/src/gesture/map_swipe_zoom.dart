@@ -1,20 +1,21 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_map_animations/flutter_map_animations.dart';
 
 class MapSwipeZoom extends StatelessWidget {
   const MapSwipeZoom({
-    super.key,
     required AnimatedMapController animatedMapController,
+    super.key,
   }) : _animatedMapController = animatedMapController;
 
   final AnimatedMapController _animatedMapController;
 
   @override
   Widget build(BuildContext context) {
-    bool zoomFlag = false;
-    double currentZoom = 16;
-    double newZoom = 16;
-    double startingPositionY = 0.0;
+    var zoomFlag = false;
+    var currentZoom = 16.0;
+    var newZoom = 16.0;
+    var startingPositionY = 0.0;
+
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onVerticalDragStart: (details) {
@@ -28,14 +29,16 @@ class MapSwipeZoom extends StatelessWidget {
       },
       onVerticalDragUpdate: (details) {
         if (zoomFlag == true) {
-          final double currentPositionY = details.localPosition.dy;
-          final double difference = startingPositionY - currentPositionY;
-          final double height = MediaQuery.of(context).size.height;
-          final double scaleFactor = 1.0 + (2 * difference / height);
+          final currentPositionY = details.localPosition.dy;
+          final difference = startingPositionY - currentPositionY;
+          final height = MediaQuery.of(context).size.height;
+          final scaleFactor = 1.0 + (2 * difference / height);
           newZoom = currentZoom * scaleFactor;
           if (newZoom >= 2 && newZoom <= 18) {
             _animatedMapController.mapController.move(
-                _animatedMapController.mapController.camera.center, newZoom);
+              _animatedMapController.mapController.camera.center,
+              newZoom,
+            );
           }
         }
       },
