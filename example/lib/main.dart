@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nekonata_map/nekonata_map.dart';
@@ -22,10 +24,11 @@ class _MyAppState extends ConsumerState<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
           actions: [
-            IconButton(
-              icon: const Icon(Icons.apple),
-              onPressed: () => _changeTileLayer(const AppleMapTileLayer()),
-            ),
+            if (Platform.isIOS)
+              IconButton(
+                icon: const Icon(Icons.apple),
+                onPressed: () => _changeTileLayer(const AppleMapTileLayer()),
+              ),
             IconButton(
               icon: const Icon(Icons.android),
               onPressed: () => _changeTileLayer(const GoogleMapTileLayer()),
