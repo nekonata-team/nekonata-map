@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_animations/flutter_map_animations.dart';
@@ -14,6 +13,18 @@ import 'package:nekonata_map/src/marker_controller.dart';
 
 typedef OnRotateEnd = void Function(double radian);
 typedef OnZoomEnd = void Function(double zoom);
+
+final class NekonataMapAnimationData {
+  const NekonataMapAnimationData({
+    this.scaleCurve = Curves.easeInOutCubic,
+    this.interactionEndDetectionThreshold = Durations.medium3,
+    this.scaleAnimationDuration = Durations.long1,
+  });
+
+  final Curve scaleCurve;
+  final Duration interactionEndDetectionThreshold;
+  final Duration scaleAnimationDuration;
+}
 
 class NekonataMap extends StatefulHookWidget {
   const NekonataMap({
@@ -34,10 +45,12 @@ class NekonataMap extends StatefulHookWidget {
     this.children,
     this.markerController,
     this.attributionAlignment = AttributionAlignment.bottomLeft,
+    this.animationData = const NekonataMapAnimationData(),
   });
 
   final AnimatedMapController animatedMapController;
   final LatLng initialCenter;
+  final TileLayerWidget tileLayer;
   final double? initialZoom;
   final double? minZoom;
   final double? maxZoom;
@@ -50,28 +63,25 @@ class NekonataMap extends StatefulHookWidget {
   final List<Widget>? children;
   final List<Widget>? actionChildren;
   final MarkerController? markerController;
-  final TileLayerWidget tileLayer;
   final AttributionAlignment attributionAlignment;
+  final NekonataMapAnimationData animationData;
 
   @override
   State<NekonataMap> createState() => NekonataMapState();
 }
 
 class NekonataMapState extends State<NekonataMap> {
-  static const _scaleCurve = Curves.easeInOutCubic;
-  static const _interactionEndDetectionThreshold = Duration(milliseconds: 300);
-  static const _scaleDuration = Duration(milliseconds: 500);
-
-  late TileLayerWidget _tileLayer = widget.tileLayer;
+  late var _tileLayer = widget.tileLayer;
+  late final _animationData = widget.animationData;
 
   double? _zoom;
   Timer? _onZoomEndTimer;
   Timer? _onRotationEndTimer;
-  MarkerController? _defaultMarkerController;
 
   Stream<MapEvent> get eventStream =>
       animatedMapController.mapController.mapEventStream;
 
+  MarkerController? _defaultMarkerController;
   MarkerController get markerController =>
       widget.markerController ??
       (_defaultMarkerController = MarkerController.empty());
@@ -106,8 +116,9 @@ class NekonataMapState extends State<NekonataMap> {
       widget.children?.every((element) => element is! MarkerLayer) ?? true,
       'Markers should be display by using markers property',
     );
-    final scaleAnimationController =
-        useAnimationController(duration: _scaleDuration);
+    final scaleAnimationController = useAnimationController(
+      duration: _animationData.scaleAnimationDuration,
+    );
 
     useEffect(
       () {
@@ -134,9 +145,15 @@ class NekonataMapState extends State<NekonataMap> {
               if (position.zoom case final double zoom) {
                 _checkZoomEnd(zoom);
                 if (zoom < 8) {
-                  scaleAnimationController.animateBack(0.8, curve: _scaleCurve);
+                  scaleAnimationController.animateBack(
+                    0.8,
+                    curve: _animationData.scaleCurve,
+                  );
                 } else {
-                  scaleAnimationController.animateTo(1, curve: _scaleCurve);
+                  scaleAnimationController.animateTo(
+                    1,
+                    curve: _animationData.scaleCurve,
+                  );
                 }
               }
               // debugPrint(position.toString());
@@ -184,7 +201,7 @@ class NekonataMapState extends State<NekonataMap> {
     if (_zoom case final double zoom when newZoom != zoom) {
       _onZoomEndTimer?.cancel();
       _onZoomEndTimer = Timer(
-        _interactionEndDetectionThreshold,
+        _animationData.interactionEndDetectionThreshold,
         () => widget.onZoomEnd?.call(zoom),
       );
     } else {
@@ -195,7 +212,7 @@ class NekonataMapState extends State<NekonataMap> {
   void _checkRotationEnd(MapEventRotate event) {
     _onRotationEndTimer?.cancel();
     _onRotationEndTimer = Timer(
-      _interactionEndDetectionThreshold,
+      _animationData.interactionEndDetectionThreshold,
       () => widget.onRotateEnd?.call(event.camera.rotationRad),
     );
   }
