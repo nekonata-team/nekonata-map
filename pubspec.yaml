@@ -1,6 +1,6 @@
 name: nekonata_map
-description: "A new Flutter plugin project."
-version: 0.0.1
+description: "Interactive map widget for flutter. Developed by nekonata."
+version: 1.0.0
 homepage:
 
 environment:
@@ -15,7 +15,6 @@ dependencies:
   flutter_map:
   flutter_map_animations:
   flutter_map_cancellable_tile_provider:
-  geolocator:
   google_maps_flutter:
   latlong2:
   plugin_platform_interface:

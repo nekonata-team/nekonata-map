@@ -11,6 +11,9 @@ import 'package:nekonata_map/src/gesture/map_swipe_zoom.dart';
 import 'package:nekonata_map/src/layer.dart';
 import 'package:nekonata_map/src/marker_controller.dart';
 
+const _limitMinZoom = 3.0;
+const _limitMaxZoom = 18.0;
+
 typedef OnRotateEnd = void Function(double radian);
 typedef OnZoomEnd = void Function(double zoom);
 
@@ -116,6 +119,23 @@ class NekonataMapState extends State<NekonataMap> {
       widget.children?.every((element) => element is! MarkerLayer) ?? true,
       'Markers should be display by using markers property',
     );
+
+    final minZoom = widget.minZoom ?? _limitMinZoom;
+    final maxZoom = widget.maxZoom ?? _limitMaxZoom;
+
+    assert(
+      minZoom <= maxZoom,
+      'minZoom must be less than or equal to maxZoom',
+    );
+    assert(
+      _limitMinZoom <= minZoom && minZoom <= _limitMaxZoom,
+      'minZoom must be between $_limitMinZoom and $_limitMaxZoom',
+    );
+    assert(
+      _limitMinZoom <= maxZoom && maxZoom <= _limitMaxZoom,
+      'maxZoom must be between $_limitMinZoom and $_limitMaxZoom',
+    );
+
     final scaleAnimationController = useAnimationController(
       duration: _animationData.scaleAnimationDuration,
     );
@@ -136,8 +156,8 @@ class NekonataMapState extends State<NekonataMap> {
           options: MapOptions(
             initialCenter: widget.initialCenter,
             initialZoom: widget.initialZoom ?? 12.0,
-            minZoom: widget.minZoom,
-            maxZoom: widget.maxZoom,
+            minZoom: widget.minZoom ?? 3,
+            maxZoom: widget.maxZoom ?? 18,
             cameraConstraint: widget.cameraConstraint,
             onTap: widget.onTap,
             onMapReady: widget.onMapReady,
@@ -177,7 +197,14 @@ class NekonataMapState extends State<NekonataMap> {
               scaleAnimationController: scaleAnimationController,
             ),
             ...?widget.children,
-            _tileLayer.buildAttribution(context, widget.attributionAlignment),
+            Builder(
+              builder: (context) {
+                return _tileLayer.buildAttribution(
+                  context,
+                  widget.attributionAlignment,
+                );
+              },
+            ),
           ],
         ),
         Positioned(

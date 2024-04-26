@@ -6,4 +6,4 @@ export 'src/layer.dart';
 export 'src/location_context.dart';
 export 'src/marker.dart';
 export 'src/marker_controller.dart';
-export 'src/nekonata_map.dart'; // TODO showで制限
+export 'src/nekonata_map.dart';

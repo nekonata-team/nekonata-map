@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:nekonata_map/nekonata_map.dart';
 // import 'package:vector_map_tiles/vector_map_tiles.dart';
 

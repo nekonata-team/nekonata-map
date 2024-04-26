@@ -58,10 +58,21 @@ class _Map extends ConsumerStatefulWidget {
 
 class _MapState extends ConsumerState<_Map> with TickerProviderStateMixin {
   late final _animatedMapController = AnimatedMapController(vsync: this);
+  late final _markerController = MarkerController(
+    [
+      LocationContextMarker(
+        const ExampleLocationContext(LatLng(35.6895, 139.6917)),
+        onTap: () => _animatedMapController.animateTo(
+          dest: const LatLng(35.6895, 139.6917),
+        ),
+      ),
+    ],
+  );
 
   @override
   void dispose() {
     _animatedMapController.dispose();
+    _markerController.dispose();
     super.dispose();
   }
 
@@ -71,6 +82,25 @@ class _MapState extends ConsumerState<_Map> with TickerProviderStateMixin {
       animatedMapController: _animatedMapController,
       initialCenter: const LatLng(35.6895, 139.6917),
       tileLayer: ref.watch(tileLayerProvider),
+      markerController: _markerController,
+    );
+  }
+}
+
+final class ExampleLocationContext extends LocationContext {
+  const ExampleLocationContext(super.latLng);
+
+  @override
+  double? get width => 48;
+
+  @override
+  double? get height => 48;
+
+  @override
+  Widget build(BuildContext context) {
+    return const Icon(
+      Icons.location_on,
+      size: 48,
     );
   }
 }
