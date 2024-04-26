@@ -69,7 +69,7 @@ class NekonataMapState extends State<NekonataMap> {
   Timer? _onRotationEndTimer;
   MarkerController? _defaultMarkerController;
 
-  Stream<MapEvent> get mapEventStream =>
+  Stream<MapEvent> get eventStream =>
       animatedMapController.mapController.mapEventStream;
 
   MarkerController get markerController =>
@@ -114,7 +114,7 @@ class NekonataMapState extends State<NekonataMap> {
           mapController: animatedMapController.mapController,
           options: MapOptions(
             initialCenter: widget.initialCenter,
-            initialZoom: widget.initialZoom ?? 13.0,
+            initialZoom: widget.initialZoom ?? 12.0,
             minZoom: widget.minZoom,
             maxZoom: widget.maxZoom,
             cameraConstraint: widget.cameraConstraint,

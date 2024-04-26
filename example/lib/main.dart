@@ -32,7 +32,9 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
         body: NekonataMap(
           animatedMapController: animatedMapController,
           initialCenter: const LatLng(35.6895, 139.6917),
-          tileLayer: const OSMTileLayer(),
+          // tileLayer: const OSMTileLayer(),
+          tileLayer: const AppleMapTileLayer(),
+          // tileLayer: const OSMTileLayer(),
         ),
       ),
     );

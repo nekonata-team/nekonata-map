@@ -45,7 +45,7 @@ class _NekonataGoogleMapState extends State<NekonataGoogleMap> {
               onMapCreated: (controller) {
                 _controller = controller;
                 _state = context.findAncestorStateOfType<NekonataMapState>()!;
-                _subscription = _state.mapEventStream.listen(_onMapEvent);
+                _subscription = _state.eventStream.listen(_onMapEvent);
                 _onMapEvent(_state.event);
               },
               onCameraMove: (position) {

@@ -29,7 +29,7 @@ class _NekonataAppleMapState extends State<NekonataAppleMap> {
         children: [
           IgnorePointer(
             child: UiKitView(
-              viewType: 'nekonata/apple_map_view',
+              viewType: 'nekonata_map',
               onPlatformViewCreated: (id) {
                 _state = context.findAncestorStateOfType<NekonataMapState>()!;
 
@@ -39,7 +39,7 @@ class _NekonataAppleMapState extends State<NekonataAppleMap> {
                     _state.animatedMapController.mapController.rotate(0);
                   },
                   onMapCreated: () {
-                    _subscription = _state.mapEventStream.listen(_onMapEvent);
+                    _subscription = _state.eventStream.listen(_onMapEvent);
                     _onMapEvent(_state.event);
                   },
                 );
@@ -76,7 +76,7 @@ class _Controller {
   }
   final int id;
 
-  late final _channel = MethodChannel('nekonata/apple_map_controller_$id');
+  late final _channel = MethodChannel('nekonata_map_$id');
 
   Future<void> update(MapCamera camera) {
     return _channel.invokeMethod<void>('update', {
