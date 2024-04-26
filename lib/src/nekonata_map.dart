@@ -62,7 +62,7 @@ class NekonataMapState extends State<NekonataMap> {
   static const _interactionEndDetectionThreshold = Duration(milliseconds: 300);
   static const _scaleDuration = Duration(milliseconds: 500);
 
-  late final _tileLayer = widget.tileLayer;
+  late TileLayerWidget _tileLayer = widget.tileLayer;
 
   double? _zoom;
   Timer? _onZoomEndTimer;
@@ -81,6 +81,16 @@ class NekonataMapState extends State<NekonataMap> {
 
   MapEvent get event =>
       MapEventCustom(camera: animatedMapController.mapController.camera);
+
+  @override
+  void didUpdateWidget(covariant NekonataMap oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.tileLayer != oldWidget.tileLayer) {
+      setState(() {
+        _tileLayer = widget.tileLayer;
+      });
+    }
+  }
 
   @override
   void dispose() {
@@ -126,7 +136,7 @@ class NekonataMapState extends State<NekonataMap> {
                 if (zoom < 8) {
                   scaleAnimationController.animateBack(0.8, curve: _scaleCurve);
                 } else {
-                  scaleAnimationController.animateTo(1.0, curve: _scaleCurve);
+                  scaleAnimationController.animateTo(1, curve: _scaleCurve);
                 }
               }
               // debugPrint(position.toString());

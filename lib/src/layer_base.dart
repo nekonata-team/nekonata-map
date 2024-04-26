@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_cancellable_tile_provider/flutter_map_cancellable_tile_provider.dart';
@@ -8,7 +7,8 @@ import 'package:nekonata_map/src/layer.dart';
 
 abstract class UrlBaseTileLayer extends TileLayerWidget {
   const UrlBaseTileLayer({
-    required this.urlTemplate, super.key,
+    required this.urlTemplate,
+    super.key,
     String? darkUrlTemplate,
   }) : darkUrlTemplate = darkUrlTemplate ?? urlTemplate;
 
@@ -24,7 +24,7 @@ abstract class UrlBaseTileLayer extends TileLayerWidget {
           brightness == Brightness.dark ? darkUrlTemplate : urlTemplate,
       userAgentPackageName: 'com.app.nekonata',
       tileProvider: CancellableNetworkTileProvider(),
-      errorImage: const AssetImage('assets/images/map_tile_on_error.jpeg'),
+      // errorImage: const AssetImage('assets/images/map_tile_on_error.jpeg'),
     );
   }
 }
