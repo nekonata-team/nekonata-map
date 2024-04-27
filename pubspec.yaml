@@ -2,6 +2,7 @@ name: nekonata_map
 description: "Interactive map widget for flutter. Developed by nekonata."
 version: 1.0.0
 homepage:
+repository: https://github.com/nekonata-team/nekonata-map
 
 environment:
   sdk: '>=3.3.4 <4.0.0'

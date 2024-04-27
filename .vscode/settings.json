@@ -21,10 +21,15 @@
         "editor.tabCompletion": "onlySnippets",
         "editor.wordBasedSuggestions": "off"
     },
+    "[markdown]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnPaste": true
+    },
     "cSpell.words": [
         "geolocator",
         "latlong",
         "nekonata",
+        "objc",
         "pubspec",
         "riverpod",
         "vsync"

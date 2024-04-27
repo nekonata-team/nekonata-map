@@ -61,7 +61,7 @@ class _MapState extends ConsumerState<_Map> with TickerProviderStateMixin {
   late final _markerController = MarkerController(
     [
       LocationContextMarker(
-        const ExampleLocationContext(LatLng(35.6895, 139.6917)),
+        const ExampleLocationElement(LatLng(35.6895, 139.6917)),
         onTap: () => _animatedMapController.animateTo(
           dest: const LatLng(35.6895, 139.6917),
         ),
@@ -87,8 +87,8 @@ class _MapState extends ConsumerState<_Map> with TickerProviderStateMixin {
   }
 }
 
-final class ExampleLocationContext extends LocationContext {
-  const ExampleLocationContext(super.latLng);
+final class ExampleLocationElement extends LocationContext {
+  const ExampleLocationElement(super.latLng);
 
   @override
   double? get width => 48;
