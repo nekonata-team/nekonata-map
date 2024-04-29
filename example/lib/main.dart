@@ -37,6 +37,10 @@ class _MyAppState extends ConsumerState<MyApp> {
               icon: const Icon(Icons.public),
               onPressed: () => _changeTileLayer(const OSMTileLayer()),
             ),
+            IconButton(
+              icon: const Icon(Icons.map),
+              onPressed: () => _changeTileLayer(const PlatformMapTileLayer()),
+            ),
           ],
         ),
         body: const _Map(),

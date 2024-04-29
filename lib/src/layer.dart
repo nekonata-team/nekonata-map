@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:nekonata_map/nekonata_map.dart';
 // import 'package:vector_map_tiles/vector_map_tiles.dart';
@@ -175,4 +177,12 @@ class GoogleMapTileLayer extends TileLayerWidget {
           ),
         ],
       );
+}
+
+class PlatformMapTileLayer extends TileLayerWidget {
+  const PlatformMapTileLayer({super.key});
+
+  @override
+  Widget build(BuildContext context) =>
+      Platform.isIOS ? const AppleMapTileLayer() : const GoogleMapTileLayer();
 }
