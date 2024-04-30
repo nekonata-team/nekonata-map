@@ -43,7 +43,7 @@ class _MyAppState extends ConsumerState<MyApp> {
             ),
           ],
         ),
-        body: const _Map(),
+        body: const SafeArea(child: _Map()),
       ),
     );
   }
