@@ -4,6 +4,8 @@ Developed by nekonata.
 
 ## Features
 
+[![style: very good analysis](https://img.shields.io/badge/style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
+
 - Interactive map experience
 - Support for Apple Maps, Google Maps, and OpenStreetMap
 - Seamless tile layer switching
