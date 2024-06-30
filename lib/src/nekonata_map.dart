@@ -158,7 +158,8 @@ class NekonataMapState extends State<NekonataMap> {
             initialZoom: widget.initialZoom ?? 12.0,
             minZoom: widget.minZoom ?? 3,
             maxZoom: widget.maxZoom ?? 18,
-            cameraConstraint: widget.cameraConstraint,
+            cameraConstraint: widget.cameraConstraint ??
+                const CameraConstraint.unconstrained(),
             onTap: widget.onTap,
             onMapReady: widget.onMapReady,
             onPositionChanged: (position, hasGesture) {

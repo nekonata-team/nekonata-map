@@ -108,7 +108,7 @@ extension _LongitudeDelta on MapCamera {
 
     const d = 180 / pi;
 
-    final p = crs.transformation.untransform(point, crs.scale(zoom));
-    return p.x * d / SphericalMercator.r;
+    final (x, _) = crs.untransform(point.x, point.y, crs.scale(zoom));
+    return x * d / SphericalMercator.r;
   }
 }
