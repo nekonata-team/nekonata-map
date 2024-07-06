@@ -115,10 +115,10 @@ class NekonataMapState extends State<NekonataMap> {
 
   @override
   Widget build(BuildContext context) {
-    assert(
-      widget.children?.every((element) => element is! MarkerLayer) ?? true,
-      'Markers should be display by using markers property',
-    );
+    // assert(
+    //   widget.children?.every((element) => element is! MarkerLayer) ?? true,
+    //   'Markers should be display by using markers property',
+    // );
 
     final minZoom = widget.minZoom ?? _limitMinZoom;
     final maxZoom = widget.maxZoom ?? _limitMaxZoom;
